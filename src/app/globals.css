@@ -10,3 +10,17 @@
 .bag-button:hover .bag-num {
   @apply bg-blue-500;
 }
+
+.items-from-cart-div::-webkit-scrollbar {
+  width: 6px;
+}
+
+.items-from-cart-div::-webkit-scrollbar-thumb {
+  background-color: #8b8b8b; /* Color del pulgar (la parte que puedes arrastrar) */
+  border-radius: 6px; /* Radio de borde del pulgar */
+}
+
+.items-from-cart-div::-webkit-scrollbar-track {
+  background-color: #333333; /* Color del pulgar (la parte que puedes arrastrar) */
+  border-radius: 6px;
+}

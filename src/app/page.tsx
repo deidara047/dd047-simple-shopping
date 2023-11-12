@@ -1,5 +1,9 @@
 import ProductCard from '@/components/ProductCard';
-import Image from 'next/image'
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home | SimpleShopping',
+}
 
 export default function Home() {
   return (
