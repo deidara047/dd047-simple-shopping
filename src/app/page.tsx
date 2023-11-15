@@ -1,6 +1,7 @@
 import ProductCard from '@/components/ProductCard';
 import type { Metadata } from 'next';
 
+
 export const metadata: Metadata = {
   title: 'Home | SimpleShopping',
 }

@@ -1,17 +1,16 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
+import LoginForm from "./LoginForm";
 
 export const metadata: Metadata = {
-  title: 'Log In | SimpleShopping',
-}
-
+  title: "Login | SimpleShopping",
+};
 
 export default function Login() {
-  return <div className="max-w-sm flex justify-center mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <Link className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" href="#">
-        <FontAwesomeIcon icon={faGoogle} /> <span className="ms-3">Log In with Google</span>
-      </Link>
-  </div>
+  return (
+    <div className="mt-11">
+      <div className="w-full max-w-sm mx-auto p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <LoginForm />
+      </div>
+    </div>
+  );
 }

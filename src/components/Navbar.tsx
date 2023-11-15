@@ -70,7 +70,7 @@ export default function Navbar() {
                     currentRoute === "/login"
                       ? "md:text-blue-700"
                       : "md:hover:text-blue-700"
-                  }  md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                  } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
                 >
                   Log In
                 </Link>
