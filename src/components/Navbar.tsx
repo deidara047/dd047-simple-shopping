@@ -1,23 +1,33 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import CartSideNav from "./CartSideNav";
+import { realmApp } from "@/utils";
+
+type IsUserResult = "loading" | "true" | "false";
 
 export default function Navbar() {
+  const app = realmApp;
+  const [isUserState, setIsUserState] = useState<IsUserResult>("loading");
   const currentRoute = usePathname();
   const [isSideNaveOpened, setIsSideNaveOpened] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (app.currentUser) {
+      setIsUserState("true");
+    } else {
+      setIsUserState("false");
+    }
+  }, [app.currentUser]);
+
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link
-            href="/"
-            className="flex items-center"
-          >
+          <Link href="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               SimpleShopping
             </span>
@@ -62,32 +72,50 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/login"
-                  prefetch={false}
-                  className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
-                    currentRoute === "/login"
-                      ? "md:text-blue-700"
-                      : "md:hover:text-blue-700"
-                  } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
-                >
-                  Log In
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/signup"
-                  prefetch={false}
-                  className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
-                    currentRoute === "/signup"
-                      ? "md:text-blue-700"
-                      : "md:hover:text-blue-700"
-                  } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
-                >
-                  Sign Up
-                </Link>
-              </li>
+              {isUserState === "false" ? (
+                <>
+                  <li>
+                    <Link
+                      href="/login"
+                      prefetch={false}
+                      className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
+                        currentRoute === "/login"
+                          ? "md:text-blue-700"
+                          : "md:hover:text-blue-700"
+                      } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                    >
+                      Log In
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/signup"
+                      prefetch={false}
+                      className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
+                        currentRoute === "/signup"
+                          ? "md:text-blue-700"
+                          : "md:hover:text-blue-700"
+                      } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                    >
+                      Sign Up
+                    </Link>
+                  </li>
+                </>
+              ) : isUserState === "true" ? (
+                <li>
+                  <Link
+                    href="/logout"
+                    prefetch={false}
+                    className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
+                      currentRoute === "/logout"
+                        ? "md:text-blue-700"
+                        : "md:hover:text-blue-700"
+                    } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                  >
+                    Log Out
+                  </Link>
+                </li>
+              ) : null}
               <li>
                 <Link
                   href="/about"
