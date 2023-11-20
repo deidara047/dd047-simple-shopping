@@ -1,24 +1,14 @@
-import ProductCard from '@/components/ProductCard';
-import type { Metadata } from 'next';
-
+import ProductCard from "@/components/ProductCard";
+import axios, {type AxiosResponse} from "axios";
+import type { Metadata } from "next";
+import AppComponent from "./AppComponent";
 
 export const metadata: Metadata = {
-  title: 'Home | SimpleShopping',
-}
+  title: "Home | SimpleShopping",
+};
 
-export default function Home() {
+export default async function Home() {
   return (
-    <>
-    <h1 className='font-bold text-3xl'>All Products</h1>
-
-    <div className='grid grid-cols-4 gap-6 mt-4'>
-      <ProductCard/>
-      <ProductCard/>
-      <ProductCard/>
-      <ProductCard/>
-      <ProductCard/>
-    </div>
-    </>
-    
-    );
+    <AppComponent />
+  );
 }
