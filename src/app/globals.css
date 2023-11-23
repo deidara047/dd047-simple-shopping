@@ -24,3 +24,7 @@
   background-color: #333333; /* Color del pulgar (la parte que puedes arrastrar) */
   border-radius: 6px;
 }
+
+.link-style {
+  @apply inline-flex items-center text-blue-600 hover:underline
+}

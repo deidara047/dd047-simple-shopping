@@ -5,9 +5,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import CartSideNav from "./CartSideNav";
-import { realmApp } from "@/utils";
-
-type IsUserResult = "loading" | "true" | "false";
+import { IsUserResult, realmApp } from "@/utils";
 
 export default function Navbar() {
   const app = realmApp;

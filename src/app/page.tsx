@@ -1,5 +1,3 @@
-import ProductCard from "@/components/ProductCard";
-import axios, {type AxiosResponse} from "axios";
 import type { Metadata } from "next";
 import AppComponent from "./AppComponent";
 
