@@ -1,13 +1,17 @@
-import Link from "next/link";
+import { addProduct } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 interface CProps {
   id: String,
   name: String,
   price: Number,
-  imageRoute: String
+  imageRoute: String,
+  isInCart: boolean
 }
 
 const ProductCard: React.FC<CProps> = (props) => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow">
       <div>
@@ -22,28 +26,18 @@ const ProductCard: React.FC<CProps> = (props) => {
         <p className="font-bold text-lg mb-3 text-blue-900">
           ${props.price.toFixed(2)}
         </p>
-        <Link
-          href={`/product/${props.id}`}
-          prefetch={false}
-          className="inline-flex items-center px-3 w-full py-2 text-sm font-medium justify-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+        <button
+          className="inline-flex items-center disabled:font-semibold px-3 w-full py-2 text-sm font-medium justify-center disabled:text-black disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-blue-700 hover:bg-blue-800 text-white rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300"
+          disabled={props.isInCart}
+          onClick={() => dispatch(addProduct({
+            amount: 0,
+            imageRoute: props.imageRoute,
+            name: props.name,
+            product_id: props.id
+          }))}
         >
-          Read More
-          <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
-        </Link>
+          {props.isInCart ? "In Cart" : "+ Add to cart"}
+        </button>
       </div>
     </div>
   );

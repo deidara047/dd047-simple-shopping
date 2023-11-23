@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import CartSideNav from "./CartSideNav";
 import { IsUserResult, realmApp } from "@/utils";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function Navbar() {
   const app = realmApp;
+  const arrCart = useAppSelector((state) => state.cartReducer.arrCart);
   const [isUserState, setIsUserState] = useState<IsUserResult>("loading");
   const currentRoute = usePathname();
   const [isSideNaveOpened, setIsSideNaveOpened] = useState<boolean>(false);
@@ -148,7 +150,7 @@ export default function Navbar() {
                   </svg>
 
                   <div className="bag-num absolute top-0 right-0 rounded-full text-xs py-1 px-2 bg-white text-black">
-                    0
+                    {arrCart.length}
                   </div>
                 </button>
               </li>

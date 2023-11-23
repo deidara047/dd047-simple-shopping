@@ -2,17 +2,14 @@
 
 import ProductCard from "@/components/ProductCard";
 import { DBC_Product } from "@/dbClassesInterfaces";
-import { decrementValue, incrementValue } from "@/redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { IsUserResult, realmApp } from "@/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function AppComponent() {
   const app = realmApp;
-  const reduxValue = useAppSelector((state) => state.cartReducer.value);
-  const dispatch = useAppDispatch();
-
+  const arrCart = useAppSelector((state) => state.cartReducer.arrCart);
   const [productsData, setProductsData] = useState<DBC_Product[] | null>();
   const [isUserState, setIsUserState] = useState<IsUserResult>("loading");
 
@@ -36,24 +33,24 @@ export default function AppComponent() {
 
   return (
     <>
-      Tha value: {reduxValue}
-      <button onClick={() => dispatch(incrementValue())} className="p-3 rounded bg-red-600 hover:bg-red-500">+</button>
-      <button onClick={() => dispatch(decrementValue())} className="p-3 rounded bg-red-600 hover:bg-red-500">-</button>
       {isUserState === "true" ? (
         productsData ? (
-          <div className="grid grid-cols-4 gap-6 mt-4">
+          <div>
             <h1 className="font-bold text-3xl">All Products</h1>
-            {productsData.map((product) => {
-              return (
-                <ProductCard
-                  id={product._id.toString()}
-                  key={product._id}
-                  name={product.name}
-                  price={product.price}
-                  imageRoute={product.imageRoute}
-                />
-              );
-            })}
+            <div className="grid grid-cols-4 gap-6 mt-4">
+              {productsData.map((product) => {
+                return (
+                  <ProductCard
+                    id={product._id.toString()}
+                    key={product._id}
+                    isInCart={arrCart.findIndex((elem) => elem.product_id === product._id.toString()) !== -1}
+                    name={product.name}
+                    price={product.price}
+                    imageRoute={product.imageRoute}
+                  />
+                );
+              })}
+            </div>
           </div>
         ) : (
           <div className="text-center mt-12">
@@ -80,8 +77,19 @@ export default function AppComponent() {
         )
       ) : isUserState === "false" ? (
         <div>
-          Hello, <Link className="link-style" href="/login">Log In</Link> or <Link className="link-style" href="/signup">Create an Account</Link>
-          {" "}to use this app. For more info go to <Link className="link-style" href="/about">About</Link>.
+          Hello,{" "}
+          <Link className="link-style" href="/login">
+            Log In
+          </Link>{" "}
+          or{" "}
+          <Link className="link-style" href="/signup">
+            Create an Account
+          </Link>{" "}
+          to use this app. For more info go to{" "}
+          <Link className="link-style" href="/about">
+            About
+          </Link>
+          .
         </div>
       ) : (
         <div className="text-center mt-12">
