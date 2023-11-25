@@ -72,6 +72,19 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/about"
+                  prefetch={false}
+                  className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
+                    currentRoute === "/about"
+                      ? "md:text-blue-700"
+                      : "md:hover:text-blue-700"
+                  } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                >
+                  About
+                </Link>
+              </li>
               {isUserState === "false" ? (
                 <>
                   <li>
@@ -102,58 +115,60 @@ export default function Navbar() {
                   </li>
                 </>
               ) : isUserState === "true" ? (
-                <li>
-                  <Link
-                    href="/logout"
-                    prefetch={false}
-                    className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
-                      currentRoute === "/logout"
-                        ? "md:text-blue-700"
-                        : "md:hover:text-blue-700"
-                    } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
-                  >
-                    Log Out
-                  </Link>
-                </li>
-              ) : null}
-              <li>
-                <Link
-                  href="/about"
-                  prefetch={false}
-                  className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
-                    currentRoute === "/about"
-                      ? "md:text-blue-700"
-                      : "md:hover:text-blue-700"
-                  } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={() => setIsSideNaveOpened(true)}
-                  className="block py-2 px-3 bag-button relative text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                    />
-                  </svg>
+                <>
+                  <li>
+                    <Link
+                      href="/my-user"
+                      prefetch={false}
+                      className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
+                        currentRoute === "/my-user"
+                          ? "md:text-blue-700"
+                          : "md:hover:text-blue-700"
+                      } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                    >
+                      My User
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/logout"
+                      prefetch={false}
+                      className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 ${
+                        currentRoute === "/logout"
+                          ? "md:text-blue-700"
+                          : "md:hover:text-blue-700"
+                      } md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`}
+                    >
+                      Log Out
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setIsSideNaveOpened(true)}
+                      className="block py-2 px-3 bag-button relative text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                        />
+                      </svg>
 
-                  <div className="bag-num absolute top-0 right-0 rounded-full text-xs py-1 px-2 bg-white text-black">
-                    {arrCart.length}
-                  </div>
-                </button>
-              </li>
+                      <div className="bag-num absolute top-0 right-0 rounded-full text-xs py-1 px-2 bg-white text-black">
+                        {arrCart.length}
+                      </div>
+                    </button>
+                  </li>
+                </>
+              ) : null}
             </ul>
           </div>
         </div>

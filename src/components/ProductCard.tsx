@@ -30,10 +30,11 @@ const ProductCard: React.FC<CProps> = (props) => {
           className="inline-flex items-center disabled:font-semibold px-3 w-full py-2 text-sm font-medium justify-center disabled:text-black disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-blue-700 hover:bg-blue-800 text-white rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300"
           disabled={props.isInCart}
           onClick={() => dispatch(addProduct({
-            amount: 0,
+            amount: 1,
             imageRoute: props.imageRoute,
             name: props.name,
-            product_id: props.id
+            product_id: props.id,
+            price: props.price
           }))}
         >
           {props.isInCart ? "In Cart" : "+ Add to cart"}

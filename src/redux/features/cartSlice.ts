@@ -6,6 +6,7 @@ interface CartElement {
   name: String;
   imageRoute: String;
   amount: Number;
+  price: Number;
 }
 
 export interface CartState {
@@ -26,6 +27,7 @@ export const cartSlice = createSlice({
         name: action.payload.name,
         imageRoute: action.payload.imageRoute,
         amount: action.payload.amount,
+        price: action.payload.price
       });
     },
     removeProduct: (state, action: PayloadAction<String>) => {
@@ -49,12 +51,16 @@ export const cartSlice = createSlice({
       );
 
       if (prodIdx !== -1) {
-        if (Number(state.arrCart[prodIdx].amount) > 0) {
+        if (Number(state.arrCart[prodIdx].amount) > 1) {
           state.arrCart[prodIdx].amount =
             Number(state.arrCart[prodIdx].amount) - 1;
         }
       }
     },
+
+    resetCart: (state) => {
+      state.arrCart = [];
+    }
   },
 });
 
@@ -65,4 +71,5 @@ export const {
   removeProduct,
   decrementAmountOfProduct,
   incrementAmountOfProduct,
+  resetCart
 } = cartSlice.actions;

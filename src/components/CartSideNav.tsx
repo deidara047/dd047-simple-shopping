@@ -1,12 +1,53 @@
 "use client";
 
-import Link from "next/link";
 import ItemFromCart from "./ItemFromCart";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { realmApp } from "@/utils";
+import Swal from "sweetalert2";
+import { resetCart } from "@/redux/features/cartSlice";
+import { useState } from "react";
+import { BSON } from "realm-web";
 
 export default function CartSideNav() {
+  const [isLoading, setIsLoading] = useState(false);
   const arrCart = useAppSelector((state) => state.cartReducer.arrCart);
+  const app = realmApp;
   const dispatch = useAppDispatch();
+
+  async function makeThePurchase() {
+    if (app.currentUser) {
+      try {
+        const mongo = app.currentUser.mongoClient("mongodb-atlas");
+        const collection = mongo.db("app_db").collection("history");
+        
+        setIsLoading(true);
+        let objToSave = {
+          owner_id: new BSON.ObjectId(app.currentUser.id),
+          itemsPurchased: arrCart.map((elem) => new BSON.ObjectId(String(elem.product_id))),
+          total: arrCart.reduce(
+            (acc: number, item) =>
+              acc + Number(item.amount) * Number(item.price),
+            0
+          ),
+          createdAt: new Date()
+        };
+        
+        const res = await collection.insertOne(objToSave);
+        console.log(res);
+        Swal.fire(
+          "Successful purchase!",
+          "The purchase has been made successfully. Now you can check the purchase made in My User.",
+          "success"
+        );
+        dispatch(resetCart());
+        
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  }
 
   return (
     <div className="flex flex-col grow h-full">
@@ -68,11 +109,12 @@ export default function CartSideNav() {
       </div>
       <div className="mt-3">
         <button
-          disabled={arrCart.length === 0}
+          disabled={arrCart.length === 0 || isLoading}
           className="inline-flex disabled:opacity-50 disabled:hover:opacity-50 disabled:hover:bg-blue-700 items-center px-3 w-full py-2 text-sm font-medium justify-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
           style={{ transition: ".2s ease opacity" }}
+          onClick={makeThePurchase}
         >
-          Go to purchase
+          {isLoading ? "..." : "Purchase"}
           <svg
             className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
             aria-hidden="true"
