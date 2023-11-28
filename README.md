@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# About this app
+This application is a simple store that you can select your products,
+and "buy" them. This app works with Redux for the shopping cart. As a
+frontend we have NextJS and for a backend we use MongoDB Realm.
 
-## Getting Started
+As a disclaimer, I want to say that I wanted to implement Facebook Login
+as a login system, and a purchase simulation system, that is, Stripe.
 
-First, run the development server:
+As a newbie, I had trouble implementing Facebook Login in my app, so I
+made the decision to abandon it, because it was too time-consuming. and
+**create a separate project that implements it** (for Stripe, I think
+I'm not going to implement anything. In due time, I think I will read
+its API documentation and implement it.). Stay tuned for my new project (which implements Facebook Login),
+the repo link will appear in this section when it is ready:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#It's not ready yet#
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This video shows all the functionalities of this app
+[https://youtu.be/I_EBPUkDvZY?si=O54whNfM71bAzB9Y](https://youtu.be/I_EBPUkDvZY?si=O54whNfM71bAzB9Y)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How can I test this app?
+1. Create a MongoDB Realm project
+2. Make sure you have permissions in your MongoDB Realm app to implement this application (make sure accept the URL you will use, in this case, http://localhost:3000, and also it has to accept your IP), I'm not going to explain how to do it, but you can refer to the application documentation for more information.
+2. Get a copy of the repo (clone or download)
+3. Run `npm install` to install all the dependencies
+4. In `src/utils.tsx` file, change the value of `REALM_APP_ID` with the `REALM_APP_ID` of your app.
+5. Make sure the name of your cluster when you use mongoClient is correct, in my case (and I didn't change it), is "mongodb-atlas". As an example of its implementation, you can check `src/AppComponent.tsx`, line 27. You can check the MongoDB Realm documentation for more information.
+6. If all your service implementation is correct, run NextJS frontend using `npm run dev` and finally go to the link.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Disclaimer
+At the moment you are reading this, the backend I used is deleted.
