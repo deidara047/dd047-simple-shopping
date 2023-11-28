@@ -10,8 +10,10 @@ export default function About() {
       <h1 className="text-2xl font-bold">About this app</h1>
       <p>
         This application is a simple store that you can select your products,
-        and "buy" them. This app works with Redux for the shopping cart. As a
-        frontend we have NextJS and for a backend we use MongoDB Realm.
+        and "buy" them. This app works with <b>Redux</b> for the shopping cart (you can
+        test it when you navigate between the links of the app, of course if you reload the site all
+        the cart data will be deleted). As a frontend we have <b>NextJS</b> and for a
+        backend we use <b>MongoDB Realm</b>.
       </p>
       <p>
         As a disclaimer, I want to say that I wanted to implement Facebook Login
