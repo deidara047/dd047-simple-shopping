@@ -75,10 +75,10 @@ export default function CartSideNav() {
         <div className="max-h-[100px] flex flex-col gap-4">
           {arrCart.length > 0 ? (
             <>
-              {arrCart.map((elem) => {
+              {arrCart.map((elem, index) => {
                 return (
                   <ItemFromCart
-                    key={elem.product_id}
+                    key={String(elem.product_id)}
                     id={elem.product_id}
                     name={elem.name}
                     amount={elem.amount}
